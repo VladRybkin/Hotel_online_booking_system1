@@ -17,7 +17,6 @@ public class User {
 
     public User(long id, String fullName, String phoneNumber, String email) {
         this.id = id;
-        this.id = TextUtil.getLastId(TextUtil.USER_FILE_NAME);
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.email = email;
