@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Hotel {
 
-    private long id;
+    private int id;
     private String name;
     private String city;
     private List<Room> rooms;
@@ -17,7 +17,7 @@ public class Hotel {
     //поле Currency перенести из сущности Рум в сущность Хотел
 
     public Hotel(String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
-//        this.id = TextUtils.getLastId("Hotel");  TextUtils пока досвечивается красным
+        this.id = TextUtils.getLastId("Hotel");
         this.name = name;
         this.city = city;
         this.rooms = new ArrayList<Room>();
@@ -25,13 +25,10 @@ public class Hotel {
         this.numberOfRooms = numberOfRooms;
     }
 
-    public Hotel(long id, String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
+    public Hotel(int id, String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
+        this(name,city,rooms,currency,numberOfRooms);
         this.id = id;
-        this.name = name;
-        this.city = city;
-        this.rooms = new ArrayList<Room>();
-        this.currency = currency;
-        this.numberOfRooms = numberOfRooms;
+
     }
 
     public Room findRoomById(long id) {
