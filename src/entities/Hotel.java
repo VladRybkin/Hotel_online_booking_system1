@@ -1,49 +1,26 @@
 package entities;
 
+import dao.Dao;
+import dao.RoomDao;
 import util.TextUtil;
-import enums.Currency;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Hotel {
 
     private long id;
     private String name;
     private String city;
-    private final List<Room> rooms;
 
-    public Hotel(String name, String city, List<Room> rooms) {
-        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city, rooms);
+    public Hotel(String name, String city) {
+        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city);
     }
 
-    public Hotel(long id, String name, String city, List<Room> rooms) throws Error{
+    public Hotel(long id, String name, String city) throws Error{
         this.id = id;
         this.name = name;
         this.city = city;
-        try {
-            rooms.forEach(room -> room.setHotel(this));
-        } catch (Error e) {
-            System.out.println("Hotel is not create becouse" + e.getMessage());
-            throw new Error(e);
-        }
-        this.rooms = rooms;
-    }
-
-
-    public Room findRoomById(long id) {
-        Room roomIsfound = null;
-        try {
-
-//            roomIsfound = rooms.stream().filter(room -> room.getId() == id).findAny().orElse(null); стрим подсвечен красным
-        } catch (NullPointerException e) {
-            System.out.println("This room doesn't exist in the list of hotel rooms");
-        }
-        return roomIsfound;
-    }
-
-    public void addRoom(Room room) {
-        this.rooms.add(room);
     }
 
     public long getId() {
@@ -67,7 +44,12 @@ public class Hotel {
     }
 
     public List<Room> getRooms() {
-        return rooms;
+        Dao<Room> roomDao = new RoomDao();
+        try {
+            return roomDao.getAll().stream().filter(room -> room.getHotel().getId() == id).collect(Collectors.toList());
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     @Override

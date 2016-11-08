@@ -6,44 +6,117 @@ import entities.Room;
 import enums.Currency;
 import enums.RoomType;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by Администратор on 08.11.2016.
- */
 public class Main {
     public static void main(String[] args) {
+        dataInitializer();
 
-        HotelDao hotelDao = new HotelDao();
-        dataInitializer(hotelDao);
-
+        Controller controller = new Controller();
+        controller.getAllNotReservedRooms().forEach(System.out::println);
     }
 
-    private static void dataInitializer(HotelDao hotelDao) {
+    private static void dataInitializer() {
 
-        Room room1 = new Room(3, 200, Currency.UAH, 2, RoomType.Standard);
-        Room room2 = new Room(3, 400, Currency.UAH, 2, RoomType.Econom);
-        List<Room> rooms = new ArrayList<>();
-        rooms.add(room1);
-        rooms.add(room2);
-        Dao<Room> roomDao = new RoomDao();
-        roomDao.add(room1);
-        roomDao.add(room2);
+        try (BufferedReader brHotel = new BufferedReader(new FileReader("Hotel"));
+             BufferedReader brRoom = new BufferedReader(new FileReader("Room"))){
+        } catch (IOException e) {
 
-        hotelDao.add(new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev", rooms));
-//        hotelDao.add(new Hotel("Космополит", "Kharkiv", rooms));
+            HotelDao hotelDao = new HotelDao();
+            Dao<Room> roomDao = new RoomDao();
 
-        List<Hotel> hotels = hotelDao.getAll();
+            Hotel hotel1 = (new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev"));
+            Hotel hotel2 = (new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev"));
+            Hotel hotel3 = (new Hotel("Космополит", "Kharkiv"));
+            Hotel hotel4 = (new Hotel("Гостинный двор", "Kharkiv"));
+            Hotel hotel5 = (new Hotel("Astoria", "Lviv"));
+            Hotel hotel6 = (new Hotel("Nobilis", "Lviv"));
 
-        hotels.forEach(System.out::println);
-        hotels.forEach(hotel -> hotel.getRooms().forEach(System.out::println));
+            hotelDao.add(hotel1);
+            hotelDao.add(hotel2);
+            hotelDao.add(hotel3);
+            hotelDao.add(hotel4);
+            hotelDao.add(hotel5);
+            hotelDao.add(hotel6);
 
+            roomDao.add(new Room(1, 2500, Currency.UAH, 1, RoomType.Lux, hotel1));
+            roomDao.add(new Room(2, 3300, Currency.UAH, 2, RoomType.Lux, hotel1));
+            roomDao.add(new Room(3, 1500, Currency.UAH, 1, RoomType.Standard, hotel1));
+            roomDao.add(new Room(4, 1800, Currency.UAH, 2, RoomType.Standard, hotel1));
+            roomDao.add(new Room(5, 2200, Currency.UAH, 3, RoomType.Standard, hotel1));
+            roomDao.add(new Room(6, 1000, Currency.UAH, 1, RoomType.Econom, hotel1));
+            roomDao.add(new Room(7, 1300, Currency.UAH, 2, RoomType.Econom, hotel1));
+            roomDao.add(new Room(8, 1300, Currency.UAH, 2, RoomType.Econom, hotel1));
+            roomDao.add(new Room(9, 1600, Currency.UAH, 3, RoomType.Econom, hotel1));
+            roomDao.add(new Room(10, 1600, Currency.UAH, 3, RoomType.Econom, hotel1));
 
-//        Hotel hotel2 = (new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev"));
-//        Hotel hotel3 = (new Hotel("Космополит", "Kharkiv"));
-//        Hotel hotel4 = (new Hotel("Гостинный двор", "Kharkiv"));
-//        Hotel hotel5 = (new Hotel("Astoria", "Lviv"));
-//        Hotel hotel6 = (new Hotel("Nobilis", "Lviv"));
+            roomDao.add(new Room(1, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(2, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(3, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(4, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(5, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(6, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(7, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(8, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(9, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(10, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+            roomDao.add(new Room(11, 2500, Currency.USD, 2, RoomType.Lux, hotel2));
+
+            roomDao.add(new Room(1, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(2, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(3, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(4, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(5, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(6, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(7, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(8, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(9, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(10, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(11, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+            roomDao.add(new Room(12, 2500, Currency.UAH, 2, RoomType.Lux, hotel3));
+
+            roomDao.add(new Room(1, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(2, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(3, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(4, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(5, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(6, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(7, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(8, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(9, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+            roomDao.add(new Room(10, 2500, Currency.USD, 2, RoomType.Lux, hotel4));
+
+            roomDao.add(new Room(1, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(2, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(3, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(4, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(5, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(6, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(7, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(8, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(9, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(10, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+            roomDao.add(new Room(11, 2500, Currency.UAH, 2, RoomType.Lux, hotel5));
+
+            roomDao.add(new Room(1, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(2, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(3, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(4, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(5, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(6, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(7, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(8, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(9, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(10, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(11, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+            roomDao.add(new Room(12, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+        }
+//        List<Hotel> hotels = hotelDao.getAll();
+//
+//        hotels.forEach(System.out::println);
+//        hotels.forEach(hotel -> hotel.getRooms().forEach(System.out::println));
     }
 }
