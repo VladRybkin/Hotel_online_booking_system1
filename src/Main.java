@@ -15,7 +15,8 @@ public class Main {
 
     private static void dataInitializer(HotelDao hotelDao) {
 
-        hotelDao.add(new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev", Currency.UAH, 10));
+        hotelDao.add(new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev"));
+        hotelDao.add(new Hotel("Космополит", "Kharkiv"));
 
 //        Hotel hotel2 = (new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev"));
 //        Hotel hotel3 = (new Hotel("Космополит", "Kharkiv"));

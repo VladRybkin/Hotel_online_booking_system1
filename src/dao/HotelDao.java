@@ -80,8 +80,7 @@ public class HotelDao implements Dao<Hotel> {
 
         stringHotel.append(hotel.getId()).append(TextUtil.getSeparator());
         stringHotel.append(hotel.getName()).append(TextUtil.getSeparator());
-        stringHotel.append(hotel.getCity()).append(TextUtil.getSeparator());
-        stringHotel.append(hotel.getNumberOfRooms());
+        stringHotel.append(hotel.getCity());
 
         return stringHotel.toString();
     }

@@ -35,6 +35,7 @@ public class TextUtil {
     public static void writeToFile(String entityName, String line){
         File dataFile = new File(getPath() + entityName);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataFile, true))){
+            bw.newLine();
             bw.write(line);
         } catch (IOException e) {
             e.printStackTrace();
