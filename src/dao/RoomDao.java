@@ -18,6 +18,7 @@ public class RoomDao implements Dao<Room>{
 
     @Override
     public void delete(long id) {
+        TextUtil.deleteFromFile(TextUtil.getRoomFileName(), id );
 
     }
 
