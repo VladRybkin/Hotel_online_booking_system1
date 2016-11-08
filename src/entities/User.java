@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.Random;
 import util.TextUtil;
 
 public class User {
@@ -12,7 +11,6 @@ public class User {
 
     public User(String fullName, String phoneNumber, String email) {
         this(TextUtil.getLastId(TextUtil.USER_FILE_NAME), fullName, phoneNumber, email);
-
     }
 
     public User(long id, String fullName, String phoneNumber, String email) {
