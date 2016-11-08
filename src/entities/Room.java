@@ -66,13 +66,6 @@ public class Room {
         return hotel;
     }
 
-    public void setHotel(Hotel hotel) throws Error {
-        if (this.hotel != null) {
-            throw new Error("Room: " + this.toString() + " already have hotel");
-        }
-        this.hotel = hotel;
-    }
-
     public boolean isReserved() {
         if (reservedForUser != null) {
             return true;
@@ -107,25 +100,27 @@ public class Room {
         result = 31 * result + reservedForUser.hashCode();
         return result;
     }
-//    Под старое поле
-//    @Override
-//    public String toString() {
-//        return  "" + hotel + ", " +"room " + "№" + roomNumber +
-//                ", " + roomType.getTranslate() +
-//                ", " + persons + " persons" +
-//                ", price: " + price + currency.getName();
-//    }
 
-    //  Под измененные поля
+//    Под старое поле
     @Override
     public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", roomNumber=" + roomNumber +
-                ", price=" + price +
-                ", persons=" + persons +
-                ", roomType=" + roomType +
-                ", reservedForUser=" + reservedForUser +
-                '}';
+        return  "" + hotel + ", " +
+                "room " + "№" + roomNumber +
+                ", " + roomType.getTranslate() +
+                ", " + persons + " persons" +
+                ", price: " + price + currency.getName();
     }
+
+    //  Под измененные поля
+//    @Override
+//    public String toString() {
+//        return "Room{" +
+//                "id=" + id +
+//                ", roomNumber=" + roomNumber +
+//                ", price=" + price +
+//                ", persons=" + persons +
+//                ", roomType=" + roomType +
+//                ", reservedForUser=" + reservedForUser +
+//                '}';
+//    }
 }
