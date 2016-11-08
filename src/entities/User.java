@@ -64,7 +64,6 @@ public class User {
         if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
         if (fullName != null ? !fullName.equals(user.fullName) : user.fullName != null) return false;
         return email != null ? email.equals(user.email) : user.email == null;
-
     }
 
     @Override

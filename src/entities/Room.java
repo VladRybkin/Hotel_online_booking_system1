@@ -28,9 +28,6 @@ public class Room {
         this.roomType = roomType;
     }
 
-    //TODO добавить еще один конструктор но уже с возможностью передавать в него айдишник,
-    //а не используя метод getLastId, чтобы создавать обьекты из под ДАО
-
     public long getId() {
         return id;
     }
