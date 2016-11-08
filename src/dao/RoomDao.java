@@ -13,7 +13,7 @@ public class RoomDao implements Dao<Room>{
 
     @Override
     public void update(Room room) {
-
+        TextUtil.updateInFile(TextUtil.ROOM_FILE_NAME, roomToLine(room));
     }
 
     @Override
