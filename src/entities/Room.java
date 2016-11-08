@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Room {
 
-    private long id;
+    private int id;
     private int roomNumber;
     private int price;
     private int persons;
@@ -16,19 +16,17 @@ public class Room {
     //TODO поле Currency перенести из сущности Рум в сущность Хотел
     //поле hotel убрать, будем доставать обратно зная отель и перебирая его комнаты
     public Room(int number, int price, int persons, RoomType roomType) {
-//        this.id = TextUtils.getLastId("Room"); TextUtils пока досвечивается красным
+        this.id = TextUtils.getLastId("Room");
         this.roomNumber = number;
         this.price = price;
         this.persons = persons;
         this.roomType = roomType;
     }
 
-    public Room(long id, int roomNumber, int price, int persons, RoomType roomType) {
+    public Room(int id, int roomNumber, int price, int persons, RoomType roomType) {
+        this(roomNumber,price,persons,roomType);
         this.id = id;
-        this.roomNumber = roomNumber;
-        this.price = price;
-        this.persons = persons;
-        this.roomType = roomType;
+
     }
 
     //TODO добавить еще один конструктор но уже с возможностью передавать в него айдишник,
@@ -95,7 +93,7 @@ public class Room {
 //                ", price: " + price + currency.getName();
 //    }
 
-//  Под измененные поля
+    //  Под измененные поля
     @Override
     public String toString() {
         return "Room{" +

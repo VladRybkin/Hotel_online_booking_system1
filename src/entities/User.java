@@ -4,16 +4,22 @@ import java.util.Random;
 
 public class User {
 
-    private long id;
+    private int id;
     private String phoneNumber;
     private String fullName;
     private String email;
 
     public User(String fullName, String phoneNumber, String email) {
-        this.id = new Random().nextLong();
+        this.id = TextUtils.getLastId("User");
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.email = email;
+    }
+
+    public User(int id, String phoneNumber, String fullName, String email) {
+        this(phoneNumber, fullName, email);
+        this.id = id;
+
     }
 
     public String getEmailWithName() {
