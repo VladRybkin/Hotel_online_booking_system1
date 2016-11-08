@@ -13,15 +13,21 @@ public class Hotel {
     private String city;
     private List<Room> rooms;
 
-    public Hotel(String name, String city) {
-        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city);
+    public Hotel(String name, String city, List<Room> rooms) {
+        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city, rooms);
     }
 
-    public Hotel(long id, String name, String city) {
+    public Hotel(long id, String name, String city, List<Room> rooms) throws Error{
         this.id = id;
         this.name = name;
         this.city = city;
-        this.rooms = new ArrayList<Room>();
+        try {
+            rooms.forEach(room -> room.setHotel(this));
+        } catch (Error e) {
+            System.out.println("Hotel is not create becouse" + e.getMessage());
+            throw new Error(e);
+        }
+        this.rooms = rooms;
     }
 
 

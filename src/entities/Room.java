@@ -14,6 +14,7 @@ public class Room {
     private int persons;
     private RoomType roomType;
     private User reservedForUser;
+    private Hotel hotel;
 
     public Room(int roomNumber, int price, Currency currency, int persons, RoomType roomType) {
         this(TextUtil.getLastId(TextUtil.ROOM_FILE_NAME), roomNumber, price, currency, persons, roomType);
@@ -58,6 +59,17 @@ public class Room {
 
     public Currency getCurrency() {
         return currency;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) throws Error {
+        if (this.hotel != null) {
+            throw new Error("Room: " + this.toString() + " already have hotel");
+        }
+        this.hotel = hotel;
     }
 
     @Override

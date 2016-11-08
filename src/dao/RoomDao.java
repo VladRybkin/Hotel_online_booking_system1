@@ -50,13 +50,17 @@ public class RoomDao implements Dao<Room>{
     private String roomToLine(Room room) {
         StringBuffer stringRoom = new StringBuffer();
 
-        stringRoom.append(room.getId()).append(TextUtil.getSeparator());
-        stringRoom.append(room.getRoomNumber()).append(TextUtil.getSeparator());
-        stringRoom.append(room.getPersons()).append(TextUtil.getSeparator());
-        stringRoom.append(room.getRoomType().name()).append(TextUtil.getSeparator());
-        stringRoom.append(room.getPrice()).append(TextUtil.getSeparator());
-        stringRoom.append(room.getCurrency()).append(TextUtil.getSeparator());
-        stringRoom.append(room.getReservedForUser().getId());
+        stringRoom.append(room.getId()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringRoom.append(room.getRoomNumber()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringRoom.append(room.getPersons()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringRoom.append(room.getRoomType().name()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringRoom.append(room.getPrice()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringRoom.append(room.getCurrency()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        try {
+            stringRoom.append(room.getReservedForUser().getId()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        } catch (NullPointerException e) {
+            stringRoom.append(TextUtil.DB_FIELDS_SEPARATOR);
+        }
 
         return stringRoom.toString();
     }
@@ -65,7 +69,7 @@ public class RoomDao implements Dao<Room>{
         if (line.isEmpty()) {
             return null;
         }
-        String[] fields = line.split(TextUtil.getSeparator());
+        String[] fields = line.split(TextUtil.DB_FIELDS_SEPARATOR);
         long id = Long.parseLong(fields[0]);
         int roomNumber = Integer.parseInt(fields[1]);
         int persons = Integer.parseInt(fields[2]);
@@ -73,7 +77,13 @@ public class RoomDao implements Dao<Room>{
         int price = Integer.parseInt(fields[4]);
         Currency currency = Currency.valueOf(fields[5]);
         Dao<User> userDao = new UserDao();
-        User user = userDao.findByID(Long.parseLong(fields[6]));
+        User user;
+        try {
+            user = userDao.findByID(Long.parseLong(fields[6]));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            user = null;
+        }
+
         Room room = new Room(id, roomNumber, price, currency, persons, roomType);
         room.setReservedForUser(user);
         return room;
