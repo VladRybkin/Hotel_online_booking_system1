@@ -16,17 +16,18 @@ public class Room {
     private User reservedForUser;
     private Hotel hotel;
 
-    public Room(int roomNumber, int price, Currency currency, int persons, RoomType roomType) {
-        this(TextUtil.getLastId(TextUtil.ROOM_FILE_NAME), roomNumber, price, currency, persons, roomType);
+    public Room(int roomNumber, int price, Currency currency, int persons, RoomType roomType, Hotel hotel) {
+        this(TextUtil.getLastId(TextUtil.ROOM_FILE_NAME), roomNumber, price, currency, persons, roomType, hotel);
     }
 
-    public Room(long id, int roomNumber, int price, Currency currency, int persons, RoomType roomType) {
+    public Room(long id, int roomNumber, int price, Currency currency, int persons, RoomType roomType, Hotel hotel) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.price = price;
         this.currency = currency;
         this.persons = persons;
         this.roomType = roomType;
+        this.hotel = hotel;
     }
 
     public long getId() {

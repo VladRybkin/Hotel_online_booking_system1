@@ -1,4 +1,3 @@
-import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
 import dao.Dao;
 import dao.HotelDao;
 import dao.RoomDao;
@@ -9,14 +8,13 @@ import entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Controller {
 
-    private Dao<Hotel> hotelDao;
-    private Dao<Room> roomDao;
-    private Dao<User> userDao;
+    private static Dao<Hotel> hotelDao;
+    private static Dao<Room> roomDao;
+    private static Dao<User> userDao;
 
     public Controller() {
         this.hotelDao = new HotelDao();

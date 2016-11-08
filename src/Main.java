@@ -15,24 +15,25 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        HotelDao hotelDao = new HotelDao();
-        dataInitializer(hotelDao);
+
+        dataInitializer();
 
     }
 
-    private static void dataInitializer(HotelDao hotelDao) {
-
-        Room room1 = new Room(3, 200, Currency.UAH, 2, RoomType.Standard);
-        Room room2 = new Room(3, 400, Currency.UAH, 2, RoomType.Econom);
-        List<Room> rooms = new ArrayList<>();
-        rooms.add(room1);
-        rooms.add(room2);
+    private static void dataInitializer() {
+        HotelDao hotelDao = new HotelDao();
         Dao<Room> roomDao = new RoomDao();
+
+        Hotel hotel1 = new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev");
+        hotelDao.add(hotel1);
+
+        Room room1 = new Room(3, 200, Currency.UAH, 2, RoomType.Standard, hotel1);
+        Room room2 = new Room(3, 400, Currency.UAH, 2, RoomType.Econom, hotel1);
         roomDao.add(room1);
         roomDao.add(room2);
 
-        hotelDao.add(new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev", rooms));
-//        hotelDao.add(new Hotel("Космополит", "Kharkiv", rooms));
+
+//        hotelDao.add(new Hotel("Космополит", "Kharkiv"));
 
         List<Hotel> hotels = hotelDao.getAll();
 

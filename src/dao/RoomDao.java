@@ -1,5 +1,6 @@
 package dao;
 
+import entities.Hotel;
 import entities.Room;
 import entities.User;
 import enums.Currency;
@@ -38,11 +39,11 @@ public class RoomDao implements Dao<Room>{
         List<Room> rooms = new ArrayList<>();
 
         for (String line : lines) {
-            Room hotel = lineToRoom(line);
-            if (hotel == null) {
+            Room room = lineToRoom(line);
+            if (room == null) {
                 continue;
             }
-            rooms.add(hotel);
+            rooms.add(room);
         }
         return rooms;
     }
@@ -56,6 +57,7 @@ public class RoomDao implements Dao<Room>{
         stringRoom.append(room.getRoomType().name()).append(TextUtil.DB_FIELDS_SEPARATOR);
         stringRoom.append(room.getPrice()).append(TextUtil.DB_FIELDS_SEPARATOR);
         stringRoom.append(room.getCurrency()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringRoom.append(room.getHotel().getId()).append(TextUtil.DB_FIELDS_SEPARATOR);
         try {
             stringRoom.append(room.getReservedForUser().getId()).append(TextUtil.DB_FIELDS_SEPARATOR);
         } catch (NullPointerException e) {
@@ -77,14 +79,16 @@ public class RoomDao implements Dao<Room>{
         int price = Integer.parseInt(fields[4]);
         Currency currency = Currency.valueOf(fields[5]);
         Dao<User> userDao = new UserDao();
+        Dao<Hotel> hotelDao = new HotelDao();
+        Hotel hotel = hotelDao.findByID(Long.parseLong(fields[6]));
         User user;
         try {
-            user = userDao.findByID(Long.parseLong(fields[6]));
+            user = userDao.findByID(Long.parseLong(fields[7]));
         } catch (ArrayIndexOutOfBoundsException e) {
             user = null;
         }
 
-        Room room = new Room(id, roomNumber, price, currency, persons, roomType);
+        Room room = new Room(id, roomNumber, price, currency, persons, roomType, hotel);
         room.setReservedForUser(user);
         return room;
     }

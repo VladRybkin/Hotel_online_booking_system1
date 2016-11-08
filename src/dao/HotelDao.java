@@ -54,7 +54,6 @@ public class HotelDao implements Dao<Hotel> {
         stringHotel.append(hotel.getId()).append(TextUtil.DB_FIELDS_SEPARATOR);
         stringHotel.append(hotel.getName()).append(TextUtil.DB_FIELDS_SEPARATOR);
         stringHotel.append(hotel.getCity()).append(TextUtil.DB_FIELDS_SEPARATOR);
-        stringHotel.append(listToField(hotel.getRooms())).append(TextUtil.DB_FIELDS_SEPARATOR);
 
         return stringHotel.toString();
     }
@@ -67,17 +66,19 @@ public class HotelDao implements Dao<Hotel> {
         long id = Long.parseLong(fields[0]);
         String name = fields[1];
         String city = fields[2];
-        List<Room> rooms = fieldToList(fields[3]);
-        Hotel hotel = new Hotel(id, name, city, rooms);
+        Hotel hotel = new Hotel(id, name, city);
         return hotel;
     }
 
+/*
     private String listToField(List<Room> rooms) {
         return rooms.stream()
                 .map(room -> Long.toString(room.getId()))
                 .collect(Collectors.joining(TextUtil.LIST_FIELDS_SEPARATOR));
     }
+*/
 
+/*
     private List<Room> fieldToList(String field) {
         if (field.isEmpty()) {
             return null;
@@ -91,4 +92,5 @@ public class HotelDao implements Dao<Hotel> {
         }
         return rooms;
     }
+*/
 }
