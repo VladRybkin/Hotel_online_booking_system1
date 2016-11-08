@@ -1,4 +1,4 @@
-package src.enums;
+package enums;
 
 public enum RoomType {
     Standard("Стандарт"), Econom("Эконом"), Lux("Люкс");

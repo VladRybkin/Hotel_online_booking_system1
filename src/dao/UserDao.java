@@ -1,9 +1,8 @@
 package dao;
 
-//import database.Tables;
-//import database.UsersTable;
+
 import entities.User;
-import static util.TextUtil.*;
+import util.TextUtil;
 
 import java.util.List;
 
@@ -11,49 +10,41 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void add(User user) {
-        Tables<User> userTables = new UsersTable();
-        try {
-            userTables.add(user);
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage() + "(" + e.getStackTrace() + ")");
-        }
+
+        TextUtil.writeToFile(TextUtil.USER_FILE_NAME, userToLine(user));
     }
 
     @Override
     public void update(User user) {
-        Tables<User> userTables = new UsersTable();
-        try {
-            userTables.update(user);
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage() + "(" + e.getStackTrace() + ")");
-        }
+
     }
 
     @Override
     public void delete(long id) {
-        Tables<User> userTables = new UsersTable();
-        try {
-            userTables.delete(id);
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage() + "(" + e.getStackTrace() + ")");
-        }
+
     }
 
     @Override
     public User findByID(long id) {
-        UsersTable userTables = new UsersTable();
-        try {
-            return userTables.findByID(id);
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage() + "(" + e.getStackTrace() + ")");
-            return null;
-        }
+
+        return null;
     }
 
     @Override
     public List<User> getAll() {
-        UsersTable userTables = new UsersTable();
-        return userTables.getAll();
+
+        return null;
+    }
+
+    private String userToLine(User user) {
+        StringBuffer stringUser = new StringBuffer();
+
+        stringUser.append(user.getId()).append(TextUtil.getSeparator());
+        stringUser.append(user.getFullName()).append(TextUtil.getSeparator());
+        stringUser.append(user.getEmail()).append(TextUtil.getSeparator());
+        stringUser.append(user.getPhoneNumber());
+
+        return stringUser.toString();
     }
 }
 

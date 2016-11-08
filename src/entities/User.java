@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.Random;
+import util.TextUtil;
 
 public class User {
 
@@ -10,10 +11,16 @@ public class User {
     private String email;
 
     public User(String fullName, String phoneNumber, String email) {
-        this.id = new Random().nextLong();
+        this.id = TextUtil.getLastId(TextUtil.getUserFileName());
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.email = email;
+    }
+
+    public User(int id, String phoneNumber, String fullName, String email) {
+        this(phoneNumber, fullName, email);
+        this.id = id;
+
     }
 
     public String getEmailWithName() {

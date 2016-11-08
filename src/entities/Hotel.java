@@ -10,6 +10,8 @@ public class Hotel {
     private String name;
     private String city;
     private List<Room> rooms;
+    private Currency currency;
+    private int numberOfRooms;
     //TODO
     //добавить поле ReservedBy типа User
     //поле Currency перенести из сущности Рум в сущность Хотел
@@ -19,6 +21,8 @@ public class Hotel {
         this.name = name;
         this.city = city;
         this.rooms = new ArrayList<Room>();
+        this.currency = currency;
+        this.numberOfRooms = numberOfRooms;
     }
 
     public Hotel(long id, String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
@@ -26,6 +30,8 @@ public class Hotel {
         this.name = name;
         this.city = city;
         this.rooms = new ArrayList<Room>();
+        this.currency = currency;
+        this.numberOfRooms = numberOfRooms;
     }
 
     public Room findRoomById(long id) {
@@ -41,6 +47,7 @@ public class Hotel {
 
     public void addRoom(Room room) {
         this.rooms.add(room);
+        this.numberOfRooms += 1;
     }
 
     public long getId() {
@@ -66,6 +73,12 @@ public class Hotel {
     public List<Room> getRooms() {
         return rooms;
     }
+
+    public int getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
+    public Currency getCurrency() {return currency;}
 
     @Override
     public boolean equals(Object o) {
