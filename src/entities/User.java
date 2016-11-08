@@ -11,16 +11,16 @@ public class User {
     private String email;
 
     public User(String fullName, String phoneNumber, String email) {
-        this.id = TextUtil.getLastId(TextUtil.getUserFileName());
+        this(TextUtil.getLastId(TextUtil.USER_FILE_NAME), fullName, phoneNumber, email);
+
+    }
+
+    public User(long id, String fullName, String phoneNumber, String email) {
+        this.id = id;
+        this.id = TextUtil.getLastId(TextUtil.USER_FILE_NAME);
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.email = email;
-    }
-
-    public User(int id, String phoneNumber, String fullName, String email) {
-        this(phoneNumber, fullName, email);
-        this.id = id;
-
     }
 
     public String getEmailWithName() {

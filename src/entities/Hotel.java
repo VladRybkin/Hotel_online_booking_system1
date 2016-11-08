@@ -4,7 +4,6 @@ import util.TextUtil;
 import enums.Currency;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 public class Hotel {
@@ -13,26 +12,18 @@ public class Hotel {
     private String name;
     private String city;
     private List<Room> rooms;
-    //TODO
-    //добавить поле ReservedBy типа User
-    //поле Currency перенести из сущности Рум в сущность Хотел
 
-    public Hotel(String name, String city, Currency currency, int numberOfRooms) {
-        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city, currency, numberOfRooms);
+    public Hotel(String name, String city, int numberOfRooms) {
+        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city,  numberOfRooms);
     }
 
-    public Hotel(long id, String name, String city, Currency currency, int numberOfRooms) {
+    public Hotel(long id, String name, String city, int numberOfRooms) {
         this.id = id;
         this.name = name;
         this.city = city;
         this.rooms = new ArrayList<Room>();
     }
 
-    public Hotel(int id, String name, String city, Currency currency, int numberOfRooms) {
-        this(name, city, currency, numberOfRooms);
-        this.id = id;
-
-    }
 
     public Room findRoomById(long id) {
         Room roomIsfound = null;

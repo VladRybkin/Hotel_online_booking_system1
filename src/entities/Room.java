@@ -2,7 +2,8 @@ package entities;
 
 import enums.RoomType;
 import util.TextUtil;
-import java.util.Random;
+import enums.Currency;
+
 
 public class Room {
 
@@ -14,25 +15,17 @@ public class Room {
     private RoomType roomType;
     private User reservedForUser;
 
-    //TODO поле Currency перенести из сущности Рум в сущность Хотел
-    //поле hotel убрать, будем доставать обратно зная отель и перебирая его комнаты
-    public Room(int roomNumber, int price, int persons, RoomType roomType) {
-        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), roomNumber, price, persons, roomType);
+    public Room(int roomNumber, int price, Currency currency, int persons, RoomType roomType) {
+        this(TextUtil.getLastId(TextUtil.ROOM_FILE_NAME), roomNumber, price, currency, persons, roomType);
     }
 
-    public Room(long id, int roomNumber, int price, int persons, RoomType roomType) {
+    public Room(long id, int roomNumber, int price, Currency currency, int persons, RoomType roomType) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.price = price;
         this.currency = currency;
         this.persons = persons;
         this.roomType = roomType;
-    }
-
-    public Room(int id, int roomNumber, int price, int persons, RoomType roomType) {
-        this(roomNumber,price,persons,roomType);
-        this.id = id;
-
     }
 
     //TODO добавить еще один конструктор но уже с возможностью передавать в него айдишник,
