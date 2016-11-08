@@ -54,7 +54,7 @@ public class HotelDao implements Dao<Hotel> {
 
         for (Hotel hotel : hotels) {
 
-            if (hotels.equals(hotel.getName())) {
+            if (name.equals(hotel.getName())) {
                 duplicatedNames.add(hotel);
             }
         }
@@ -71,7 +71,7 @@ public class HotelDao implements Dao<Hotel> {
 
         for (Hotel hotel : hotels) {
 
-            if (hotels.equals(hotel.getCity())) {
+            if (city.equals(hotel.getCity())) {
                 duplicatedCities.add(hotel);
             }
         }
