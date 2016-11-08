@@ -9,6 +9,7 @@ public class Room {
     private long id;
     private int roomNumber;
     private int price;
+    private Currency currency;
     private int persons;
     private RoomType roomType;
     private User reservedForUser;
@@ -23,8 +24,15 @@ public class Room {
         this.id = id;
         this.roomNumber = roomNumber;
         this.price = price;
+        this.currency = currency;
         this.persons = persons;
         this.roomType = roomType;
+    }
+
+    public Room(int id, int roomNumber, int price, int persons, RoomType roomType) {
+        this(roomNumber,price,persons,roomType);
+        this.id = id;
+
     }
 
     //TODO добавить еще один конструктор но уже с возможностью передавать в него айдишник,
@@ -58,6 +66,10 @@ public class Room {
         this.reservedForUser = reservedForUser;
     }
 
+    public Currency getCurrency() {
+        return currency;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +81,8 @@ public class Room {
         if (roomNumber != room.roomNumber) return false;
         if (price != room.price) return false;
         if (persons != room.persons) return false;
-        if (roomType != room.roomType) return false;
+        if (!currency.equals(room.currency)) return false;
+        if (!roomType.equals(room.roomType)) return false;
         return reservedForUser.equals(room.reservedForUser);
     }
 
@@ -78,8 +91,10 @@ public class Room {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + roomNumber;
         result = 31 * result + price;
+        result = 31 * result + currency.hashCode();
         result = 31 * result + persons;
-        result = 31 * result + (roomType != null ? roomType.hashCode() : 0);
+        result = 31 * result + roomType.hashCode();
+        result = 31 * result + reservedForUser.hashCode();
         return result;
     }
 //    Под старое поле

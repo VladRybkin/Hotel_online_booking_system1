@@ -2,6 +2,8 @@ package util;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -39,8 +41,24 @@ public class TextUtil {
         }
     }
 
-    public static void updateInFile(String entityName, String line){
-
+    public static void updateInFile(String entityName, String line) {
+        List<String> list;
+        list = TextUtil.readFromFile(entityName);
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String s = (String) iterator.next();
+            String[] res1 = s.split(":");
+            String[] res2 = line.split(":");
+            if (res1[0].equals(res2[0])) {
+                try {
+                    TextUtil.deleteFromFile(entityName, Integer.parseInt(res1[0]));
+                } catch (ClassCastException e) {
+                    System.out.println("There is classcast exception into updateFile()");
+                    e.printStackTrace();
+                }
+                TextUtil.writeToFile(entityName, line);
+            }
+        }
     }
 
     public static void deleteFromFile(String entityName, long id){
