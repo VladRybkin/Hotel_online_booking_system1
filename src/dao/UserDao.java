@@ -11,7 +11,7 @@ public class UserDao implements Dao<User> {
     @Override
     public void add(User user) {
 
-        TextUtil.writeToFile(TextUtil.getUserFileName(), userToLine(user));
+        TextUtil.writeToFile(TextUtil.USER_FILE_NAME, userToLine(user));
     }
 
     @Override

@@ -16,13 +16,13 @@ public class HotelDao implements Dao<Hotel> {
 //        TODO и потом эту строку передать в метод writeToFile
 //        TODO String example = "1:Hilton:Kyiv:3";
 
-        TextUtil.writeToFile(TextUtil.getHotelFileName(), hotelToLine(hotel));
+        TextUtil.writeToFile(TextUtil.HOTEL_FILE_NAME, hotelToLine(hotel));
     }
 
     @Override
     public void update(Hotel hotel) {
 
-        TextUtil.updateInFile("Hotel", hotelToLine(hotel));
+        TextUtil.updateInFile(TextUtil.HOTEL_FILE_NAME, hotelToLine(hotel));
         //TODO Привести все поля обьекта Хотел, что передается в метод к видку как в example
         //и потом эту строку передать в метод writeToFile
     }

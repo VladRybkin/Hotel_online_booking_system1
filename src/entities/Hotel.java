@@ -1,9 +1,9 @@
 package entities;
 
 import util.TextUtil;
+import enums.Currency;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 public class Hotel {
@@ -18,7 +18,7 @@ public class Hotel {
     //добавить поле ReservedBy типа User
     //поле Currency перенести из сущности Рум в сущность Хотел
 
-    public Hotel(String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
+    public Hotel(String name, String city, Currency currency, int numberOfRooms) {
         this.id = TextUtil.getLastId(TextUtil.getHotelFileName());
         this.name = name;
         this.city = city;
@@ -27,8 +27,8 @@ public class Hotel {
         this.numberOfRooms = numberOfRooms;
     }
 
-    public Hotel(int id, String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
-        this(name,city,rooms,currency,numberOfRooms);
+    public Hotel(int id, String name, String city, Currency currency, int numberOfRooms) {
+        this(name, city, currency, numberOfRooms);
         this.id = id;
 
     }
