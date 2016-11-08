@@ -28,7 +28,8 @@ public class RoomDao implements Dao<Room>{
 
     @Override
     public Room findByID(long id) {
-        return null;
+        List<Room> rooms = getAll();
+        return rooms.stream().filter(room -> room.getId() == id).findFirst().orElse(null);
     }
 
     @Override

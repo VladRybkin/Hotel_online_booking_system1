@@ -28,9 +28,7 @@ public class HotelDao implements Dao<Hotel> {
     @Override
     public Hotel findByID(long id) {
         List<Hotel> hotels = getAll();
-        //TODO Перебрать все записи АрейЛиста, сравнивая айдишник, и вывести тот у кого совпадает.
-
-        return null;
+        return hotels.stream().filter(hotel -> hotel.getId() == id).findFirst().orElse(null);
     }
 
     @Override

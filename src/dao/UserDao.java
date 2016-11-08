@@ -27,8 +27,8 @@ public class UserDao implements Dao<User> {
 
     @Override
     public User findByID(long id) {
-
-        return null;
+        List<User> users = getAll();
+        return users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
     }
 
     @Override
