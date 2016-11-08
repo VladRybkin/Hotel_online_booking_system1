@@ -53,6 +53,18 @@ public class TextUtil {
         return ":-:";
     }
 
+    public static String getHotelFileName() {
+        return "Hotel";
+    }
+
+    public static String getRoomFileName() {
+        return "Room";
+    }
+
+    public static String getUserFileName() {
+        return "User";
+    }
+
     private static String getPath(){
         return "db/";
     }

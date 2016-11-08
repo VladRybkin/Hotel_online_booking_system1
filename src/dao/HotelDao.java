@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HotelDao implements Dao<Hotel> {
 
     @Override
@@ -24,7 +23,7 @@ public class HotelDao implements Dao<Hotel> {
         stringHotel.append(hotel.getCity()).append(TextUtil.getSeparator());
         stringHotel.append(hotel.getNumberOfRooms());
 
-        TextUtil.writeToFile("Hotel", stringHotel.toString());
+        TextUtil.writeToFile(TextUtil.getHotelFileName(), stringHotel.toString());
     }
 
     @Override
