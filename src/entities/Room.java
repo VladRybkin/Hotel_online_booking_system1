@@ -1,6 +1,5 @@
 package entities;
 
-import src.enums.Currency;
 import src.enums.RoomType;
 
 import java.util.Random;
@@ -10,24 +9,26 @@ public class Room {
     private long id;
     private int roomNumber;
     private int price;
-    private Currency currency;
     private int persons;
     private RoomType roomType;
     private User reservedForUser;
-    private Hotel hotel;
+
     //TODO поле Currency перенести из сущности Рум в сущность Хотел
     //поле hotel убрать, будем доставать обратно зная отель и перебирая его комнаты
-
-    public Room(int number, int price, Currency currency, int persons, RoomType roomType, Hotel hotel) {
-        this.id = new Random().nextLong();//TODO не присваивать рандом а пользоваться методом TextUtils.getLastId(Room)
-        //по такому же принципу сделать и в остальных сущностях.
+    public Room(int number, int price, int persons, RoomType roomType) {
+//        this.id = TextUtils.getLastId("Room"); TextUtils пока досвечивается красным
         this.roomNumber = number;
         this.price = price;
-        this.currency = currency;
         this.persons = persons;
         this.roomType = roomType;
-        this.hotel = hotel;
-        hotel.addRoom(this);
+    }
+
+    public Room(long id, int roomNumber, int price, int persons, RoomType roomType) {
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.price = price;
+        this.persons = persons;
+        this.roomType = roomType;
     }
 
     //TODO добавить еще один конструктор но уже с возможностью передавать в него айдишник,
@@ -43,10 +44,6 @@ public class Room {
 
     public int getPrice() {
         return price;
-    }
-
-    public Currency getCurrency() {
-        return currency;
     }
 
     public int getPersons() {
@@ -65,10 +62,6 @@ public class Room {
         this.reservedForUser = reservedForUser;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,10 +73,8 @@ public class Room {
         if (roomNumber != room.roomNumber) return false;
         if (price != room.price) return false;
         if (persons != room.persons) return false;
-        if (currency != room.currency) return false;
         if (roomType != room.roomType) return false;
-        return hotel != null ? hotel.equals(room.hotel) : room.hotel == null;
-
+        return reservedForUser.equals(room.reservedForUser);
     }
 
     @Override
@@ -91,18 +82,29 @@ public class Room {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + roomNumber;
         result = 31 * result + price;
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
         result = 31 * result + persons;
         result = 31 * result + (roomType != null ? roomType.hashCode() : 0);
-        result = 31 * result + (hotel != null ? hotel.hashCode() : 0);
         return result;
     }
+//    Под старое поле
+//    @Override
+//    public String toString() {
+//        return  "" + hotel + ", " +"room " + "№" + roomNumber +
+//                ", " + roomType.getTranslate() +
+//                ", " + persons + " persons" +
+//                ", price: " + price + currency.getName();
+//    }
 
+//  Под измененные поля
     @Override
     public String toString() {
-        return  "" + hotel + ", " +"room " + "№" + roomNumber +
-                ", " + roomType.getTranslate() +
-                ", " + persons + " persons" +
-                ", price: " + price + currency.getName();
+        return "Room{" +
+                "id=" + id +
+                ", roomNumber=" + roomNumber +
+                ", price=" + price +
+                ", persons=" + persons +
+                ", roomType=" + roomType +
+                ", reservedForUser=" + reservedForUser +
+                '}';
     }
 }

@@ -1,8 +1,8 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
-import java.util.Random;
 
 public class Hotel {
 
@@ -10,24 +10,35 @@ public class Hotel {
     private String name;
     private String city;
     private List<Room> rooms;
+    private Currency currency;
     private int numberOfRooms;
     //TODO
     //добавить поле ReservedBy типа User
     //поле Currency перенести из сущности Рум в сущность Хотел
 
-    public Hotel(String name, String city) {
-        this.id = new Random().nextLong();
+    public Hotel(String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
+//        this.id = TextUtils.getLastId("Hotel");  TextUtils пока досвечивается красным
         this.name = name;
         this.city = city;
-        this.rooms = new ArrayList<>();
-        this.numberOfRooms = 0;
+        this.rooms = new ArrayList<Room>();
+        this.currency = currency;
+        this.numberOfRooms = numberOfRooms;
+    }
+
+    public Hotel(long id, String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+        this.rooms = new ArrayList<Room>();
+        this.currency = currency;
+        this.numberOfRooms = numberOfRooms;
     }
 
     public Room findRoomById(long id) {
         Room roomIsfound = null;
         try {
 
-            roomIsfound = rooms.stream().filter(room -> room.getId() == id).findAny().orElse(null);
+//            roomIsfound = rooms.stream().filter(room -> room.getId() == id).findAny().orElse(null); стрим подсвечен красным
         } catch (NullPointerException e) {
             System.out.println("This room doesn't exist in the list of hotel rooms");
         }
@@ -66,6 +77,8 @@ public class Hotel {
     public int getNumberOfRooms() {
         return numberOfRooms;
     }
+
+    public Currency getCurrency() {return currency;}
 
     @Override
     public boolean equals(Object o) {
