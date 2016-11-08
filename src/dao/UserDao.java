@@ -49,9 +49,9 @@ public class UserDao implements Dao<User> {
     private String userToLine(User user) {
         StringBuffer stringUser = new StringBuffer();
 
-        stringUser.append(user.getId()).append(TextUtil.getSeparator());
-        stringUser.append(user.getFullName()).append(TextUtil.getSeparator());
-        stringUser.append(user.getEmail()).append(TextUtil.getSeparator());
+        stringUser.append(user.getId()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringUser.append(user.getFullName()).append(TextUtil.DB_FIELDS_SEPARATOR);
+        stringUser.append(user.getEmail()).append(TextUtil.DB_FIELDS_SEPARATOR);
         stringUser.append(user.getPhoneNumber());
 
         return stringUser.toString();
@@ -61,7 +61,7 @@ public class UserDao implements Dao<User> {
         if (line.isEmpty()) {
             return null;
         }
-        String[] fields = line.split(TextUtil.getSeparator());
+        String[] fields = line.split(TextUtil.DB_FIELDS_SEPARATOR);
         long id = Long.parseLong(fields[0]);
         String fullName = fields[1];
         String email = fields[2];

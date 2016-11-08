@@ -11,6 +11,8 @@ public class TextUtil {
     public static final String HOTEL_FILE_NAME = "Hotel";
     public static final String ROOM_FILE_NAME = "Room";
     public static final String USER_FILE_NAME = "User";
+    public static final String DB_FIELDS_SEPARATOR = ":-:";
+    public static final String LIST_FIELDS_SEPARATOR = ":::";
 
     public static ArrayList<String> readFromFile(String entityName){
         File dataFile = new File(getPath() + entityName);
@@ -65,10 +67,6 @@ public class TextUtil {
     public static long getLastId(String entityName){
 //      TODO переделать чтоб айди был понастоящему уникальным для каждого отдельного класса
         return new Random().nextLong();
-    }
-
-    public static String getSeparator() {
-        return ":-:";
     }
 
     private static String getPath(){
