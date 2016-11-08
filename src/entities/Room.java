@@ -1,12 +1,12 @@
 package entities;
 
-import src.enums.RoomType;
-
+import enums.RoomType;
+import util.TextUtil;
 import java.util.Random;
 
 public class Room {
 
-    private int id;
+    private long id;
     private int roomNumber;
     private int price;
     private int persons;
@@ -16,7 +16,7 @@ public class Room {
     //TODO поле Currency перенести из сущности Рум в сущность Хотел
     //поле hotel убрать, будем доставать обратно зная отель и перебирая его комнаты
     public Room(int number, int price, int persons, RoomType roomType) {
-        this.id = TextUtils.getLastId("Room");
+        this.id = TextUtil.getLastId(TextUtil.getRoomFileName());
         this.roomNumber = number;
         this.price = price;
         this.persons = persons;

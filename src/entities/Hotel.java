@@ -1,12 +1,14 @@
 package entities;
 
+import util.TextUtil;
+
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
 public class Hotel {
 
-    private int id;
+    private long id;
     private String name;
     private String city;
     private List<Room> rooms;
@@ -17,10 +19,10 @@ public class Hotel {
     //поле Currency перенести из сущности Рум в сущность Хотел
 
     public Hotel(String name, String city, List<Room> rooms, Currency currency, int numberOfRooms) {
-        this.id = TextUtils.getLastId("Hotel");
+        this.id = TextUtil.getLastId(TextUtil.getHotelFileName());
         this.name = name;
         this.city = city;
-        this.rooms = new ArrayList<Room>();
+        this.rooms = new ArrayList<>();
         this.currency = currency;
         this.numberOfRooms = numberOfRooms;
     }

@@ -39,7 +39,7 @@ public class TextUtil {
 
     }
 
-    public static void deleteFromFile(String entityName, int id){
+    public static void deleteFromFile(String entityName, long id){
 
     }
 

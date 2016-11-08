@@ -1,16 +1,17 @@
 package entities;
 
 import java.util.Random;
+import util.TextUtil;
 
 public class User {
 
-    private int id;
+    private long id;
     private String phoneNumber;
     private String fullName;
     private String email;
 
     public User(String fullName, String phoneNumber, String email) {
-        this.id = TextUtils.getLastId("User");
+        this.id = TextUtil.getLastId(TextUtil.getUserFileName());
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.email = email;
