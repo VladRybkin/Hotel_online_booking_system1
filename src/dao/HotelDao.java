@@ -4,6 +4,7 @@ import entities.Hotel;
 import entities.Room;
 import util.TextUtil;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,11 @@ public class HotelDao implements Dao<Hotel> {
         //TODO Привести все поля обьекта Хотел, что передается в метод к видку как в example
         //и потом эту строку передать в метод writeToFile
         String example = "1:Hilton:Kyiv:3";
+
+        StringBuffer stringHotel = new StringBuffer();
+
+        stringHotel.append()
+
         TextUtil.writeToFile("Hotel", example);
     }
 

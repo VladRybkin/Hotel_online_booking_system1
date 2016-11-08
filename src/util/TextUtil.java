@@ -50,10 +50,14 @@ public class TextUtil {
         return 0;
     }
 
+    public static String getSeparator() {
+        return ":-:";
+    }
     private static String getPath(){
 
         return null;
     }
+
 
 
 
