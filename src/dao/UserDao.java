@@ -4,6 +4,7 @@ package dao;
 import entities.User;
 import util.TextUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao implements Dao<User> {
@@ -32,8 +33,17 @@ public class UserDao implements Dao<User> {
 
     @Override
     public List<User> getAll() {
+        List<String> lines = TextUtil.readFromFile(TextUtil.USER_FILE_NAME);
+        List<User> users = new ArrayList<>();
 
-        return null;
+        for (String line : lines) {
+            User user = lineToUser(line);
+            if (user == null) {
+                continue;
+            }
+            users.add(user);
+        }
+        return users;
     }
 
     private String userToLine(User user) {
@@ -45,6 +55,19 @@ public class UserDao implements Dao<User> {
         stringUser.append(user.getPhoneNumber());
 
         return stringUser.toString();
+    }
+
+    private User lineToUser(String line) {
+        if (line.isEmpty()) {
+            return null;
+        }
+        String[] fields = line.split(TextUtil.getSeparator());
+        long id = Long.parseLong(fields[0]);
+        String fullName = fields[1];
+        String email = fields[2];
+        String phoneNumber = fields[3];
+        User user = new User(id, fullName, email, phoneNumber);
+        return user;
     }
 }
 

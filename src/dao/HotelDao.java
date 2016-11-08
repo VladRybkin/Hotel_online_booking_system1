@@ -12,25 +12,16 @@ public class HotelDao implements Dao<Hotel> {
 
     @Override
     public void add(Hotel hotel) {
-//        TODO Привести все поля обьекта Хотел, что передается в метод к видку как в example
-//        TODO и потом эту строку передать в метод writeToFile
-//        TODO String example = "1:Hilton:Kyiv:3";
-
         TextUtil.writeToFile(TextUtil.HOTEL_FILE_NAME, hotelToLine(hotel));
     }
 
     @Override
     public void update(Hotel hotel) {
-
         TextUtil.updateInFile(TextUtil.HOTEL_FILE_NAME, hotelToLine(hotel));
-        //TODO Привести все поля обьекта Хотел, что передается в метод к видку как в example
-        //и потом эту строку передать в метод writeToFile
     }
 
     @Override
     public void delete(long id) {
-        //TODO Поле id поменять тип на int во всех сущностях и классах где оно используется
-        // разницы никакой, просто быстрее все вводить и считывать :)
         TextUtil.deleteFromFile("Hotel", id);
     }
 
@@ -44,13 +35,17 @@ public class HotelDao implements Dao<Hotel> {
 
     @Override
     public List<Hotel> getAll() {
-        ArrayList<String> hotels = TextUtil.readFromFile("Hotel");
-        //TODO Перебирая каждый элемент АрейЛиста расспарсить его с помощью метода split() класса String
-        //на массив стрингов. Потом создать обьект Хотел передавая в конструктор элементы массива,
-        //зная, что нулевой элемент это айди, первый это название отела и т.д.
-        //Все созданные обьекты записать в новый АрейЛист с отелями и вывести.
+        List<String> lines = TextUtil.readFromFile(TextUtil.HOTEL_FILE_NAME);
+        List<Hotel> hotels = new ArrayList<>();
 
-        return null;
+        for (String line : lines) {
+            Hotel hotel = lineToHotel(line);
+            if (hotel == null) {
+                continue;
+            }
+            hotels.add(hotel);
+        }
+        return hotels;
     }
 
     public List<Hotel> findByName(String name) {
@@ -83,5 +78,17 @@ public class HotelDao implements Dao<Hotel> {
         stringHotel.append(hotel.getCity());
 
         return stringHotel.toString();
+    }
+
+    private Hotel lineToHotel(String line) {
+        if (line.isEmpty()) {
+            return null;
+        }
+        String[] fields = line.split(TextUtil.getSeparator());
+        long id = Long.parseLong(fields[0]);
+        String name = fields[1];
+        String city = fields[0];
+        Hotel hotel = new Hotel(id, name, city);
+        return hotel;
     }
 }

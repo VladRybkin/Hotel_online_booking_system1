@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by tryhanuch on 07.11.16.
- */
 public class TextUtil {
 
     public static final String HOTEL_FILE_NAME = "Hotel";
@@ -18,13 +15,11 @@ public class TextUtil {
     public static ArrayList<String> readFromFile(String entityName){
         File dataFile = new File(getPath() + entityName);
         ArrayList<String> lines = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(dataFile));
+        try (BufferedReader br = new BufferedReader(new FileReader(dataFile))){
             String s;
             while((s = br.readLine()) != null){
                 lines.add(s);
             }
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

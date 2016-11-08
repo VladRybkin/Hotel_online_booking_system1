@@ -2,6 +2,8 @@ import dao.HotelDao;
 import entities.Hotel;
 import enums.Currency;
 
+import java.util.List;
+
 /**
  * Created by Администратор on 08.11.2016.
  */
@@ -18,6 +20,8 @@ public class Main {
         hotelDao.add(new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev"));
         hotelDao.add(new Hotel("Космополит", "Kharkiv"));
 
+        List<Hotel> hotels = hotelDao.getAll();
+        System.out.println(hotels);
 //        Hotel hotel2 = (new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev"));
 //        Hotel hotel3 = (new Hotel("Космополит", "Kharkiv"));
 //        Hotel hotel4 = (new Hotel("Гостинный двор", "Kharkiv"));
