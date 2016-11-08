@@ -13,11 +13,11 @@ public class Hotel {
     private String city;
     private List<Room> rooms;
 
-    public Hotel(String name, String city, int numberOfRooms) {
-        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city,  numberOfRooms);
+    public Hotel(String name, String city) {
+        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city);
     }
 
-    public Hotel(long id, String name, String city, int numberOfRooms) {
+    public Hotel(long id, String name, String city) {
         this.id = id;
         this.name = name;
         this.city = city;
