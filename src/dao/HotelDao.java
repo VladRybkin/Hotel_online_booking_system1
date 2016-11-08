@@ -22,7 +22,8 @@ public class HotelDao implements Dao<Hotel> {
 
     @Override
     public void delete(long id) {
-        TextUtil.deleteFromFile("Hotel", id);
+//        TextUtil.deleteFromFile("Hotel", id);
+        TextUtil.deleteFromFile(TextUtil.HOTEL_FILE_NAME, id);
     }
 
     @Override
