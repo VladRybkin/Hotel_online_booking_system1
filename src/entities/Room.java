@@ -72,6 +72,13 @@ public class Room {
         this.hotel = hotel;
     }
 
+    public boolean isReserved() {
+        if (reservedForUser != null) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

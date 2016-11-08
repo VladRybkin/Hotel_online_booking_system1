@@ -11,7 +11,7 @@ public class Hotel {
     private long id;
     private String name;
     private String city;
-    private List<Room> rooms;
+    private final List<Room> rooms;
 
     public Hotel(String name, String city, List<Room> rooms) {
         this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city, rooms);

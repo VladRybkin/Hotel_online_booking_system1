@@ -51,7 +51,7 @@ public class HotelDao implements Dao<Hotel> {
     public List<Hotel> findByName(String name) {
 
         List<Hotel> hotels = getAll();
-        ArrayList<Hotel> duplicatedNames = new ArrayList<Hotel>();
+        ArrayList<Hotel> duplicatedNames = new ArrayList<>();
 
         for (Hotel hotel : hotels) {
 
@@ -80,16 +80,6 @@ public class HotelDao implements Dao<Hotel> {
         //TODO Перебрать все записи Листа, сравнивая город, совпадения записать в эрейлист и вывести.
 
         return hotels;
-    }
-
-
-    public List<Room> getAllNotReservedRooms() {
-        List<Hotel> hotels = getAll();
-
-        //TODO взять лист комнат. Перебрать все записи листа комнат, проверяя reservedForUser на null
-        // совпадения записать в новый лист и вывести.
-
-        return null;
     }
 
     private String hotelToLine(Hotel hotel) {
