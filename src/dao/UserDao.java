@@ -1,8 +1,9 @@
 package dao;
 
-import src.database.Tables;
-import src.database.UsersTable;
-import src.entities.User;
+//import database.Tables;
+//import database.UsersTable;
+import entities.User;
+import static util.TextUtil.*;
 
 import java.util.List;
 
