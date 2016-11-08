@@ -51,35 +51,35 @@ public class HotelDao implements Dao<Hotel> {
     public List<Hotel> findByName(String name) {
 
         List<Hotel> hotels = getAll();
-        ArrayList<Hotel> duplicatedNames = new ArrayList<Hotel>();
+        ArrayList<Hotel> namesMatchingList = new ArrayList<Hotel>();
 
         for (Hotel hotel : hotels) {
 
             if (name.equals(hotel.getName())) {
-                duplicatedNames.add(hotel);
+                namesMatchingList.add(hotel);
             }
         }
         //TODO Перебрать все записи Листа, сравнивая имя, совпадения записать в эрейлист и вывести.
 
-        return hotels;
+        return namesMatchingList;
     }
 
 
     public List<Hotel> findByCity(String city) {
 
         List<Hotel> hotels = getAll();
-        ArrayList<Hotel> duplicatedCities = new ArrayList<Hotel>();
+        ArrayList<Hotel> citiesMatchingList = new ArrayList<Hotel>();
 
         for (Hotel hotel : hotels) {
 
             if (city.equals(hotel.getCity())) {
-                duplicatedCities.add(hotel);
+                citiesMatchingList.add(hotel);
             }
         }
 
         //TODO Перебрать все записи Листа, сравнивая город, совпадения записать в эрейлист и вывести.
 
-        return hotels;
+        return citiesMatchingList;
     }
 
 
