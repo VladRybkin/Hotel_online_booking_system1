@@ -19,18 +19,16 @@ public class Hotel {
     //поле Currency перенести из сущности Рум в сущность Хотел
 
     public Hotel(String name, String city, Currency currency, int numberOfRooms) {
-        this.id = TextUtil.getLastId(TextUtil.getHotelFileName());
+        this(TextUtil.getLastId(TextUtil.HOTEL_FILE_NAME), name, city, currency, numberOfRooms);
+    }
+
+    public Hotel(long id, String name, String city, Currency currency, int numberOfRooms) {
+        this.id = id;
         this.name = name;
         this.city = city;
         this.rooms = new ArrayList<>();
         this.currency = currency;
         this.numberOfRooms = numberOfRooms;
-    }
-
-    public Hotel(int id, String name, String city, Currency currency, int numberOfRooms) {
-        this(name, city, currency, numberOfRooms);
-        this.id = id;
-
     }
 
     public Room findRoomById(long id) {
