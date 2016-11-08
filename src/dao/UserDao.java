@@ -10,14 +10,8 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void add(User user) {
-        StringBuffer stringUser = new StringBuffer();
 
-        stringUser.append(user.getId()).append(TextUtil.getSeparator());
-        stringUser.append(user.getFullName()).append(TextUtil.getSeparator());
-        stringUser.append(user.getEmail()).append(TextUtil.getSeparator());
-        stringUser.append(user.getPhoneNumber());
-
-        TextUtil.writeToFile(TextUtil.getUserFileName(), stringUser.toString());
+        TextUtil.writeToFile(TextUtil.getUserFileName(), userToLine(user));
     }
 
     @Override
@@ -40,6 +34,17 @@ public class UserDao implements Dao<User> {
     public List<User> getAll() {
 
         return null;
+    }
+
+    private String userToLine(User user) {
+        StringBuffer stringUser = new StringBuffer();
+
+        stringUser.append(user.getId()).append(TextUtil.getSeparator());
+        stringUser.append(user.getFullName()).append(TextUtil.getSeparator());
+        stringUser.append(user.getEmail()).append(TextUtil.getSeparator());
+        stringUser.append(user.getPhoneNumber());
+
+        return stringUser.toString();
     }
 }
 
