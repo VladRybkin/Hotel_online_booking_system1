@@ -28,10 +28,14 @@ public class HotelDao implements Dao<Hotel> {
 
     @Override
     public void update(Hotel hotel) {
+        StringBuffer stringHotel = new StringBuffer();
+        stringHotel.append(hotel.getId()).append(TextUtil.getSeparator());
+        stringHotel.append(hotel.getName()).append(TextUtil.getSeparator());
+        stringHotel.append(hotel.getCity()).append(TextUtil.getSeparator());
+        stringHotel.append(hotel.getNumberOfRooms());
+        TextUtil.updateInFile("Hotel", stringHotel.toString());
         //TODO Привести все поля обьекта Хотел, что передается в метод к видку как в example
         //и потом эту строку передать в метод writeToFile
-        String example = "1:Hilton:Kyiv:3";
-        TextUtil.updateInFile("Hotel", example);
     }
 
     @Override
