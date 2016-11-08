@@ -22,6 +22,8 @@ public class Main {
 
         List<Hotel> hotels = hotelDao.getAll();
         System.out.println(hotels);
+
+
 //        Hotel hotel2 = (new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev"));
 //        Hotel hotel3 = (new Hotel("Космополит", "Kharkiv"));
 //        Hotel hotel4 = (new Hotel("Гостинный двор", "Kharkiv"));

@@ -47,21 +47,43 @@ public class HotelDao implements Dao<Hotel> {
     }
 
     public List<Hotel> findByName(String name) {
+
         List<Hotel> hotels = getAll();
+        ArrayList<Hotel> duplicatedNames = new ArrayList<Hotel>();
+
+        for (Hotel hotel : hotels) {
+
+            if (hotels.equals(hotel.getName())) {
+                duplicatedNames.add(hotel);
+            }
+        }
         //TODO Перебрать все записи Листа, сравнивая имя, совпадения записать в эрейлист и вывести.
 
-        return null;
+        return hotels;
     }
+
 
     public List<Hotel> findByCity(String city) {
+
         List<Hotel> hotels = getAll();
+        ArrayList<Hotel> duplicatedCities = new ArrayList<Hotel>();
+
+        for (Hotel hotel : hotels) {
+
+            if (hotels.equals(hotel.getCity())) {
+                duplicatedCities.add(hotel);
+            }
+        }
+
         //TODO Перебрать все записи Листа, сравнивая город, совпадения записать в эрейлист и вывести.
 
-        return null;
+        return hotels;
     }
+
 
     public List<Room> getAllNotReservedRooms() {
         List<Hotel> hotels = getAll();
+
         //TODO взять лист комнат. Перебрать все записи листа комнат, проверяя reservedForUser на null
         // совпадения записать в новый лист и вывести.
 
