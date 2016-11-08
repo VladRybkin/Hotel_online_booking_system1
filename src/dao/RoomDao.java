@@ -8,7 +8,7 @@ import java.util.List;
 public class RoomDao implements Dao<Room>{
     @Override
     public void add(Room room) {
-        TextUtil.writeToFile(TextUtil.getRoomFileName(), roomToLine(room));
+        TextUtil.writeToFile(TextUtil.ROOM_FILE_NAME, roomToLine(room));
     }
 
     @Override

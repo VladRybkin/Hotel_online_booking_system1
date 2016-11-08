@@ -9,6 +9,10 @@ import java.util.Random;
  */
 public class TextUtil {
 
+    public static final String HOTEL_FILE_NAME = "Hotel";
+    public static final String ROOM_FILE_NAME = "Room";
+    public static final String USER_FILE_NAME = "User";
+
     public static ArrayList<String> readFromFile(String entityName){
         File dataFile = new File(getPath() + entityName);
         ArrayList<String> lines = new ArrayList<>();
@@ -53,20 +57,12 @@ public class TextUtil {
         return ":-:";
     }
 
-    public static String getHotelFileName() {
-        return "Hotel";
-    }
-
-    public static String getRoomFileName() {
-        return "Room";
-    }
-
-    public static String getUserFileName() {
-        return "User";
-    }
-
     private static String getPath(){
-        return "db/";
+
+        String path = "db\\db";
+
+//        new File("C:\\Directory2\\Sub2\\Sub-Sub2").mkdirs()
+        return "";
     }
 
 
