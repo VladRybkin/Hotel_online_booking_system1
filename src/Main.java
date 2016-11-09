@@ -102,8 +102,27 @@ public class Main {
 
         System.out.println("Wrong input data tests");
         User userWrong = controller.findUserByName("Mark22");
+        System.out.println("\n----------------------------------------------\n");
 
+        System.out.println("Empty rooms in city KievWrong:");
+        List<Hotel> hotelsWrong = controller.findHotelByCity("KievWrong");
+        System.out.println("\n----------------------------------------------\n");
 
+        System.out.println("Empty rooms in city KievWrong:");
+        List<Hotel> hotelsWrong2 = controller.findHotelByName("WrongName");
+        System.out.println("\n----------------------------------------------\n");
+
+        System.out.println("Book room by wrong id`s:");
+            controller.bookRoom(4564564, 5656565, 57676767);
+        System.out.println("\n----------------------------------------------\n");
+
+        System.out.println("Cancel reservation by wrong id`s:");
+        controller.cancelReservation(6767, 6767676, 67676767);
+        System.out.println("\n----------------------------------------------\n");
+
+        System.out.println("Find rooms by empty Map:");
+        Map<String, String> wrongMap = new HashMap<>();
+        List<Room> foundRoomsWrong = controller.findRoom(wrongMap);
     }
 
     private static void dataInitializer() {

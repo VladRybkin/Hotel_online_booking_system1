@@ -36,17 +36,25 @@ public class Controller {
         if (hotelsByCity == null) {
             return new ArrayList<>();
         }
+        if (hotelsByCity.size() == 0) {
+            System.out.println("There is no hotels in city: \'" + city + "\'");
+        }
         return hotelsByCity;
     }
 
     public List<Hotel> findHotelByName(String name) {
         if (!isUserRegistered()) {
+            System.out.println("There is no hotels with name: \'" + name + "\'");
             return new ArrayList<>();
         }
+
         List<Hotel> hotels = hotelDao.getAll();
         List<Hotel> hotelsByName = hotels.stream().filter(hotel -> hotel.getName().equals(name)).collect(Collectors.toList());
         if (hotelsByName == null) {
             return new ArrayList<>();
+        }
+        if (hotelsByName.size() == 0) {
+            System.out.println("There is no hotels with name: \'" + name + "\'");
         }
         return hotelsByName;
     }
