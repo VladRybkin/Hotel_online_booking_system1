@@ -85,12 +85,12 @@ public class Controller {
 
         // Group hotels by their name
 
-        Map<String, List<Hotel>> hotelsNyName = hotels.stream().collect(
+        Map<String, List<Hotel>> hotelsByName = hotels.stream().collect(
                 Collectors.groupingBy(Hotel::getName));
 
         // Print out hotels that share one name
 
-        hotelsNyName
+        hotelsByName
                 .values()
                 .stream()
                 .filter(hotelsWithSameName -> hotelsWithSameName.size() > 1)
@@ -99,7 +99,6 @@ public class Controller {
                                 .println("Hotels with same name: "
                                         + hotelsWithSameName));
         return hotels;
-
     }
 
     public void bookRoom(long roomId, long userId, long hotelId) {
