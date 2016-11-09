@@ -44,16 +44,17 @@ public class TextUtil {
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
             String s = (String) iterator.next();
-            String[] res1 = s.split(":");
-            String[] res2 = line.split(":");
+            String[] res1 = s.split(DB_FIELDS_SEPARATOR);
+            String[] res2 = line.split(DB_FIELDS_SEPARATOR);
             if (res1[0].equals(res2[0])) {
                 try {
                     TextUtil.deleteFromFile(entityName, Integer.parseInt(res1[0]));
+                    TextUtil.writeToFile(entityName, line);
                 } catch (ClassCastException e) {
                     System.out.println("There is classcast exception into updateFile()");
                     e.printStackTrace();
                 }
-                TextUtil.writeToFile(entityName, line);
+
             }
         }
     }
