@@ -213,6 +213,7 @@ public class Controller {
                     flags.add(false);
                 }
             }
+/*
             if (entry.getKey().equals("hotelID")) {
                 Hotel hotel = hotelDao.findByID(Long.parseLong(entry.getValue()));
                 if (hotel.getId() == room.getHotel().getId()) {
@@ -221,7 +222,15 @@ public class Controller {
                     flags.add(false);
                 }
             }
-
+            if (entry.getKey().equals("city")) {
+                Hotel hotel = findHotelByCity(entry.getValue());
+                if (hotel.getId() == room.getHotel().getId()) {
+                    flags.add(true);
+                } else {
+                    flags.add(false);
+                }
+            }
+*/
         }
         if (flags.size() > 0) {
             return flags.stream().allMatch(flag -> flag == true);

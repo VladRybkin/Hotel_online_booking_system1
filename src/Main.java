@@ -53,35 +53,25 @@ public class Main {
         System.out.println("Book room by id`s:");
         hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
         user11 = CurrentUser.getCurrentUser();
-        if (hotel11 != null && user11 != null) {
-            room11 = hotel11.getRooms().stream().findFirst().orElse(null);
-            if (user11 != null) {
-                controller.bookRoom(room11.getId(), user11.getId(), hotel11.getId());
-            }
-        }
+        room11 = hotel11.getRooms().stream().findFirst().orElse(null);
+        controller.bookRoom(room11.getId(), user11.getId(), hotel11.getId());
         System.out.println("\n----------------------------------------------\n");
 
         System.out.println("Cancel reservation id`s:");
-        hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
-        user11 = CurrentUser.getCurrentUser();
-        if (hotel11 != null && user11 != null) {
-            room11 = hotel11.getRooms().stream().findFirst().orElse(null);
-            if (user11 != null) {
-                controller.cancelReservation(room11.getId(), user11.getId(), hotel11.getId());
-            }
-        }
+        controller.cancelReservation(room11.getId(), user11.getId(), hotel11.getId());
         System.out.println("\n----------------------------------------------\n");
 
 //      ----------------------------------------------------------------------------------
 
         System.out.println("Find rooms by different parameters:");
         Map<String, String> param = new HashMap<>();
-        param.put("roomNumber", "4");
-        param.put("price", "1800");
+//        param.put("roomNumber", "4");
+//        param.put("price", "1800");
         param.put("currency", "UAH");
         param.put("persons", "2");
-        param.put("roomType", "Standard");
-        param.put("hotel", "ПРЕМЬЕР ПАЛАС");
+        param.put("roomType", "Econom");
+//        param.put("hotel", "ПРЕМЬЕР ПАЛАС");
+        param.put("city", "Kiev");
 //        param.put("id", "0");
         param.put("country", "");
 
@@ -89,9 +79,6 @@ public class Main {
         foundRooms.stream().forEach(System.out::println);
         System.out.println("\n----------------------------------------------\n");
 
-        // controller.getAllNotReservedRooms().forEach(System.out::println);
-
-       //TextUtil.deleteFromFile(TextUtil.HOTEL_FILE_NAME, 3136788667899866558L);
     }
 
     private static void dataInitializer() {
