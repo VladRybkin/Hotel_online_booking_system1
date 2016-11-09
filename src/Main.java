@@ -46,22 +46,41 @@ public class Main {
         System.out.println("\n----------------------------------------------\n");
 
 //        ---------------------------------------------------------------------------------------------
-        Hotel hotel11;
-        User user11;
-        Room room11;
+
 
         System.out.println("Book room by id`s:");
-        hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
-        user11 = CurrentUser.getCurrentUser();
-        room11 = hotel11.getRooms().stream().findFirst().orElse(null);
-        controller.bookRoom(room11.getId(), user11.getId(), hotel11.getId());
-        System.out.println("\n----------------------------------------------\n");
+        try {
+            Hotel hotel11 = null;
+            User user11 = null;
+            Room room11 = null;
+            try {
+                hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
+            } catch (NullPointerException e) {
+                System.out.println("Hotel not found, booking impossible");
+                throw e;
+            }
+            try{
+                user11 = CurrentUser.getCurrentUser();
+            } catch (NullPointerException e) {
+                System.out.println("User not found, booking impossible");
+                throw e;
+            }
+            try {
+                room11 = hotel11.getRooms().stream().filter(room -> !room.isReserved()).findFirst().orElse(null);
+            } catch (NullPointerException e) {
+                System.out.println("Room not found, booking impossible");
+                throw e;
+            }
+            controller.bookRoom(room11.getId(), user11.getId(), hotel11.getId());
+            System.out.println("\n----------------------------------------------\n");
 
-        System.out.println("Cancel reservation id`s:");
-        controller.cancelReservation(room11.getId(), user11.getId(), hotel11.getId());
-        System.out.println("\n----------------------------------------------\n");
+            System.out.println("Cancel reservation id`s:");
+            controller.cancelReservation(room11.getId(), user11.getId(), hotel11.getId());
+            System.out.println("\n----------------------------------------------\n");
 
-//      ----------------------------------------------------------------------------------
+        } catch (NullPointerException e) {
+
+        }
 
         System.out.println("Find rooms by different parameters:");
         Map<String, String> param = new HashMap<>();
@@ -78,6 +97,12 @@ public class Main {
         List<Room> foundRooms = controller.findRoom(param);
         foundRooms.stream().forEach(System.out::println);
         System.out.println("\n----------------------------------------------\n");
+        System.out.println("\n----------------------------------------------\n");
+        System.out.println("\n----------------------------------------------\n");
+
+        System.out.println("Wrong input data tests");
+        User userWrong = controller.findUserByName("Mark22");
+
 
     }
 

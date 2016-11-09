@@ -20,13 +20,16 @@ public class TextUtil {
     public static ArrayList<String> readFromFile(String entityName){
         File dataFile = new File(getPath() + entityName);
         ArrayList<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(dataFile))){
+        try (BufferedReader br = new BufferedReader(new FileReader(dataFile))) {
             String s;
-            while((s = br.readLine()) != null){
+            while ((s = br.readLine()) != null) {
                 lines.add(s);
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("File: \'" + getPath() + entityName + "\' not found" );
+//            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
         return lines;

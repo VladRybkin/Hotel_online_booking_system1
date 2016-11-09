@@ -13,7 +13,6 @@ import enums.RoomType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Controller {
@@ -28,45 +27,28 @@ public class Controller {
         this.userDao = new UserDao();
     }
 
-//    public List<Hotel> findByCity(String city) {
-//        List<Hotel> hotels = hotelDao.getAll();
-//        ArrayList<Hotel> citiesMatchingList = new ArrayList<>();
-//        for (Hotel hotel : hotels) {
-//            if (city.equals(hotel.getCity())) {
-//                citiesMatchingList.add(hotel);
-//            }
-//        }
-//        return citiesMatchingList;
-//    }
-
-//    public List<Hotel> findByName(String name) {
-//        List<Hotel> hotels = hotelDao.getAll();
-//        ArrayList<Hotel> namesMatchingList = new ArrayList<>();
-//        for (Hotel hotel : hotels) {
-//            if (name.equals(hotel.getName())) {
-//                namesMatchingList.add(hotel);
-//            }
-//        }
-//        return namesMatchingList;
-//    }
-
-
     public List<Hotel> findHotelByCity(String city) {
         if (!isUserRegistered()) {
-            return null;
+            return new ArrayList<>();
         }
-
         List<Hotel> hotels = hotelDao.getAll();
-        return hotels.stream().filter(hotel -> hotel.getCity().equals(city)).collect(Collectors.toList());
+        List<Hotel> hotelsByCity = hotels.stream().filter(hotel -> hotel.getCity().equals(city)).collect(Collectors.toList());
+        if (hotelsByCity == null) {
+            return new ArrayList<>();
+        }
+        return hotelsByCity;
     }
 
     public List<Hotel> findHotelByName(String name) {
         if (!isUserRegistered()) {
-            return null;
+            return new ArrayList<>();
         }
-
         List<Hotel> hotels = hotelDao.getAll();
-        return hotels.stream().filter(hotel -> hotel.getName().equals(name)).collect(Collectors.toList());
+        List<Hotel> hotelsByName = hotels.stream().filter(hotel -> hotel.getName().equals(name)).collect(Collectors.toList());
+        if (hotelsByName == null) {
+            return new ArrayList<>();
+        }
+        return hotelsByName;
     }
 
     public void bookRoom(long roomId, long userId, long hotelId) {
@@ -120,15 +102,15 @@ public class Controller {
 
     public List<Room> getAllNotReservedRooms() {
         if (!isUserRegistered()) {
-            return null;
+            return new ArrayList<>();
         }
         List<Room> rooms = roomDao.getAll();
-        return rooms.stream().filter(room -> room.isReserved() == false).collect(Collectors.toList());
+        return rooms.stream().filter(room -> !room.isReserved()).collect(Collectors.toList());
     }
 
     public List<Room> findRoom(Map<String, String> params) {
         if (!isUserRegistered()) {
-            return null;
+            return new ArrayList<>();
         }
         List<Room> foundRooms = new ArrayList<>();
         List<Room> allNotReservedRooms = getAllNotReservedRooms();
@@ -213,24 +195,6 @@ public class Controller {
                     flags.add(false);
                 }
             }
-/*
-            if (entry.getKey().equals("hotelID")) {
-                Hotel hotel = hotelDao.findByID(Long.parseLong(entry.getValue()));
-                if (hotel.getId() == room.getHotel().getId()) {
-                    flags.add(true);
-                } else {
-                    flags.add(false);
-                }
-            }
-            if (entry.getKey().equals("city")) {
-                Hotel hotel = findHotelByCity(entry.getValue());
-                if (hotel.getId() == room.getHotel().getId()) {
-                    flags.add(true);
-                } else {
-                    flags.add(false);
-                }
-            }
-*/
         }
         if (flags.size() > 0) {
             return flags.stream().allMatch(flag -> flag == true);
@@ -240,10 +204,18 @@ public class Controller {
     }
 
     public User findUserByName(String fullName) {
-        return userDao.getAll().stream().filter(user -> user.getFullName().equals(fullName)).findFirst().orElse(null);
+        User user = userDao.getAll().stream().filter(user1 -> user1.getFullName().equals(fullName)).findFirst().orElse(null);
+        if (user == null) {
+            System.out.println("User with fullName: " + fullName + " not found");
+        }
+        return user;
     }
 
     public void registerUser(User user) {
+        if (user == null) {
+            System.out.println("System can't register user, User is null");
+            return;
+        }
         CurrentUser.setCurrentUser(user);
     }
 
