@@ -26,9 +26,9 @@ public class Main {
         User user = controller.findUserByName("Mark");
         controller.registerUser(user);
 
-//        controller.getAllNotReservedRooms().forEach(System.out::println);
+        controller.getAllNotReservedRooms().forEach(System.out::println);
 
-        TextUtil.deleteFromFile(TextUtil.HOTEL_FILE_NAME, 3136788667899866558L);
+       //TextUtil.deleteFromFile(TextUtil.HOTEL_FILE_NAME, 3136788667899866558L);
     }
 
     private static void dataInitializer() {
