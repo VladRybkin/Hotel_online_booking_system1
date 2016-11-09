@@ -59,7 +59,7 @@ public class Main {
                 System.out.println("Hotel not found, booking impossible");
                 throw e;
             }
-            try{
+            try {
                 user11 = CurrentUser.getCurrentUser();
             } catch (NullPointerException e) {
                 System.out.println("User not found, booking impossible");
@@ -113,7 +113,7 @@ public class Main {
         System.out.println("\n----------------------------------------------\n");
 
         System.out.println("Book room by wrong id`s:");
-            controller.bookRoom(4564564, 5656565, 57676767);
+        controller.bookRoom(4564564, 5656565, 57676767);
         System.out.println("\n----------------------------------------------\n");
 
         System.out.println("Cancel reservation by wrong id`s:");
@@ -129,7 +129,7 @@ public class Main {
 
         try (BufferedReader brHotel = new BufferedReader(new FileReader(TextUtil.HOTEL_FILE_NAME));
              BufferedReader brRoom = new BufferedReader(new FileReader(TextUtil.ROOM_FILE_NAME));
-             BufferedReader brUser = new BufferedReader(new FileReader(TextUtil.USER_FILE_NAME))){
+             BufferedReader brUser = new BufferedReader(new FileReader(TextUtil.USER_FILE_NAME))) {
         } catch (IOException e) {
 
             Dao hotelDao = new HotelDao();
