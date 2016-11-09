@@ -1,5 +1,8 @@
 package entities;
 
+import dao.Dao;
+import dao.RoomDao;
+import dao.UserDao;
 import enums.RoomType;
 import util.TextUtil;
 import enums.Currency;
@@ -56,6 +59,8 @@ public class Room {
 
     public void setReservedForUser(User reservedForUser) {
         this.reservedForUser = reservedForUser;
+        Dao<Room> roomDao = new RoomDao();
+        roomDao.update(this);
     }
 
     public Currency getCurrency() {

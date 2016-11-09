@@ -51,7 +51,7 @@ public class Controller {
 //    }
 
 
-    public List<Hotel> findByCity(String city) {
+    public List<Hotel> findHotelByCity(String city) {
         if (!isUserRegistered()) {
             return null;
         }
@@ -76,7 +76,7 @@ public class Controller {
         return hotels;
     }
 
-    public List<Hotel> findByName(String name) {
+    public List<Hotel> findHotelByName(String name) {
         if (!isUserRegistered()) {
             return null;
         }
@@ -238,7 +238,7 @@ public class Controller {
                 }
             }
             if (entry.getKey().equals("hotel")) {
-                Hotel hotel = findByName(entry.getValue()).stream().findFirst().orElse(null);
+                Hotel hotel = findHotelByName(entry.getValue()).stream().findFirst().orElse(null);
                 if (hotel.equals(room.getHotel())) {
                     flags.add(true);
                 } else {

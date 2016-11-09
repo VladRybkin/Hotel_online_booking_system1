@@ -52,7 +52,7 @@ public class TextUtil {
             String[] res2 = line.split(DB_FIELDS_SEPARATOR);
             if (res1[0].equals(res2[0])) {
                 try {
-                    TextUtil.deleteFromFile(entityName, Integer.parseInt(res1[0]));
+                    TextUtil.deleteFromFile(entityName, Long.parseLong(res1[0]));
                     TextUtil.writeToFile(entityName, line);
                 } catch (ClassCastException e) {
                     System.out.println("There is classcast exception into updateFile()");
