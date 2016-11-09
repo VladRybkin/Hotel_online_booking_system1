@@ -86,8 +86,14 @@ public class TextUtil {
     }
 
     public static long getLastId(String entityName){
-//      TODO переделать чтоб айди был понастоящему уникальным для каждого отдельного класса
-        return new Random().nextLong();
+        long id;
+        while (true) {
+            id = new Random().nextLong();
+            if (id > 0) {
+                break;
+            }
+        }
+        return id;
     }
 
     private static String getPath(){
