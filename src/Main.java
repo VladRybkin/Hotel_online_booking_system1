@@ -1,6 +1,7 @@
 import dao.Dao;
 import dao.HotelDao;
 import dao.RoomDao;
+import dao.UserDao;
 import entities.Hotel;
 import entities.Room;
 import entities.User;
@@ -18,17 +19,12 @@ public class Main {
 
         dataInitializer();
 
-        User user1 = new User("Mark", "555-55-55", "mark@mail.com");
-        User user2 = new User("Stiv", "222-22-22", "stiv@mail.com");
-        User user3 = new User("Bill", "333-33-33", "bill@mail.com");
+
 
         Controller controller = new Controller();
 
-        controller.addUser(user1);
-        controller.addUser(user2);
-        controller.addUser(user3);
-
-        controller.registerUser(user1);
+        User user = controller.findUserByName("Mark");
+        controller.registerUser(user);
 
 //        controller.getAllNotReservedRooms().forEach(System.out::println);
 
@@ -37,19 +33,22 @@ public class Main {
 
     private static void dataInitializer() {
 
-        try (BufferedReader brHotel = new BufferedReader(new FileReader("Hotel"));
-             BufferedReader brRoom = new BufferedReader(new FileReader("Room"))){
+        try (BufferedReader brHotel = new BufferedReader(new FileReader(TextUtil.HOTEL_FILE_NAME));
+             BufferedReader brRoom = new BufferedReader(new FileReader(TextUtil.ROOM_FILE_NAME));
+             BufferedReader brUser = new BufferedReader(new FileReader(TextUtil.USER_FILE_NAME))){
         } catch (IOException e) {
 
-            HotelDao hotelDao = new HotelDao();
+            Dao hotelDao = new HotelDao();
             Dao<Room> roomDao = new RoomDao();
+            Dao<User> userDao = new UserDao();
 
-            Hotel hotel1 = (new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev"));
-            Hotel hotel2 = (new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev"));
-            Hotel hotel3 = (new Hotel("Космополит", "Kharkiv"));
-            Hotel hotel4 = (new Hotel("Гостинный двор", "Kharkiv"));
-            Hotel hotel5 = (new Hotel("Astoria", "Lviv"));
-            Hotel hotel6 = (new Hotel("Nobilis", "Lviv"));
+
+            Hotel hotel1 = new Hotel("ПРЕМЬЕР ПАЛАС", "Kiev");
+            Hotel hotel2 = new Hotel("ОТЕЛЬ ХАЯТТ", "Kiev");
+            Hotel hotel3 = new Hotel("Космополит", "Kharkiv");
+            Hotel hotel4 = new Hotel("Гостинный двор", "Kharkiv");
+            Hotel hotel5 = new Hotel("Astoria", "Lviv");
+            Hotel hotel6 = new Hotel("Nobilis", "Lviv");
 
             hotelDao.add(hotel1);
             hotelDao.add(hotel2);
@@ -129,10 +128,10 @@ public class Main {
             roomDao.add(new Room(10, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
             roomDao.add(new Room(11, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
             roomDao.add(new Room(12, 2500, Currency.UAH, 2, RoomType.Lux, hotel6));
+
+            userDao.add(new User("Mark", "555-55-55", "mark@mail.com"));
+            userDao.add(new User("Stiv", "222-22-22", "stiv@mail.com"));
+            userDao.add(new User("Bill", "333-33-33", "bill@mail.com"));
         }
-//        List<Hotel> hotels = hotelDao.getAll();
-//
-//        hotels.forEach(System.out::println);
-//        hotels.forEach(hotel -> hotel.getRooms().forEach(System.out::println));
     }
 }

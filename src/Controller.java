@@ -262,10 +262,6 @@ public class Controller {
         }
     }
 
-    public void addUser(User user) {
-        userDao.add(user);
-    }
-
     public void registerUser(User user) {
         CurrentUser.setCurrentUser(user);
     }
