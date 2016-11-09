@@ -120,6 +120,10 @@ public class Controller {
         if (!isUserRegistered()) {
             return new ArrayList<>();
         }
+        if (params == null) {
+            System.out.println("Nothing found");
+            return new ArrayList<>();
+        }
         List<Room> foundRooms = new ArrayList<>();
         List<Room> allNotReservedRooms = getAllNotReservedRooms();
 

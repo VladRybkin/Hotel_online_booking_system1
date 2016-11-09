@@ -97,10 +97,10 @@ public class Main {
         List<Room> foundRooms = controller.findRoom(param);
         foundRooms.stream().forEach(System.out::println);
         System.out.println("\n----------------------------------------------\n");
-        System.out.println("\n----------------------------------------------\n");
+        System.out.println("\n----------------------Wrong input data tests------------------------\n");
         System.out.println("\n----------------------------------------------\n");
 
-        System.out.println("Wrong input data tests");
+        System.out.println("Find user by wrong name");
         User userWrong = controller.findUserByName("Mark22");
         System.out.println("\n----------------------------------------------\n");
 
