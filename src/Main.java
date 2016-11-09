@@ -3,6 +3,7 @@ import dao.HotelDao;
 import dao.RoomDao;
 import entities.Hotel;
 import entities.Room;
+import entities.User;
 import enums.Currency;
 import enums.RoomType;
 
@@ -13,9 +14,21 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
         dataInitializer();
 
+        User user1 = new User("Mark", "555-55-55", "mark@mail.com");
+        User user2 = new User("Stiv", "222-22-22", "stiv@mail.com");
+        User user3 = new User("Bill", "333-33-33", "bill@mail.com");
+
         Controller controller = new Controller();
+
+        controller.addUser(user1);
+        controller.addUser(user2);
+        controller.addUser(user3);
+
+        controller.registerUser(user1);
+
         controller.getAllNotReservedRooms().forEach(System.out::println);
     }
 
