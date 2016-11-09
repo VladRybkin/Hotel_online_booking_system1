@@ -26,8 +26,7 @@ public class TextUtil {
                 lines.add(s);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File: \'" + getPath() + entityName + "\' not found" );
-//            e.printStackTrace();
+            System.out.println("Can't reed from file. File: \'" + getPath() + entityName + "\' not found" );
         } catch (IOException e) {
 
         }
@@ -41,7 +40,7 @@ public class TextUtil {
             bw.write(line);
             bw.newLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Can't write to File: \'" + getPath() + entityName + "\' not found" );
         }
     }
 
@@ -58,7 +57,7 @@ public class TextUtil {
                     TextUtil.deleteFromFile(entityName, Long.parseLong(res1[0]));
                     TextUtil.writeToFile(entityName, line);
                 } catch (ClassCastException e) {
-                    System.out.println("There is classcast exception into updateFile()");
+                    System.out.println("There is class cast exception into updateFile()");
                     e.printStackTrace();
                 }
 
@@ -83,8 +82,7 @@ public class TextUtil {
             }
             Files.write(path, fileContent, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            System.out.println("File not found");
-            e.printStackTrace();
+            System.out.println("Can't delete from. File: \'" + getPath() + entityName + "\' not found" );;
         }
     }
 
