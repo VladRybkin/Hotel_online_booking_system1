@@ -42,7 +42,7 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void delete(long id) {
-
+        TextUtil.deleteFromFile(TextUtil.USER_FILE_NAME, id);
     }
 
     @Override
