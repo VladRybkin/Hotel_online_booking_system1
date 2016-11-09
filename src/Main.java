@@ -6,6 +6,7 @@ import entities.Room;
 import entities.User;
 import enums.Currency;
 import enums.RoomType;
+import util.TextUtil;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,7 +30,9 @@ public class Main {
 
         controller.registerUser(user1);
 
-        controller.getAllNotReservedRooms().forEach(System.out::println);
+//        controller.getAllNotReservedRooms().forEach(System.out::println);
+
+        TextUtil.deleteFromFile(TextUtil.HOTEL_FILE_NAME, 3136788667899866558L);
     }
 
     private static void dataInitializer() {

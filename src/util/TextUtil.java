@@ -1,6 +1,10 @@
 package util;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -61,6 +65,24 @@ public class TextUtil {
 
     public static void deleteFromFile(String entityName, long id){
 
+        ArrayList<String> fileContent = new ArrayList<>();
+        Path path = Paths.get(getPath() + entityName);
+        try {
+            fileContent.addAll(Files.readAllLines(path, StandardCharsets.UTF_8));
+            Iterator iterator = fileContent.iterator();
+            while (iterator.hasNext()) {
+                String line = (String) iterator.next();
+                String[] fields = line.split(DB_FIELDS_SEPARATOR);
+                if (Long.parseLong(fields[0]) == id) {
+                    iterator.remove();
+                    break;
+                }
+            }
+            Files.write(path, fileContent, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
     }
 
     public static long getLastId(String entityName){
