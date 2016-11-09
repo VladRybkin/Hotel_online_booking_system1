@@ -262,6 +262,10 @@ public class Controller {
         }
     }
 
+    public User findUserByName(String fullName) {
+        return userDao.getAll().stream().filter(user -> user.getFullName().equals(fullName)).findFirst().orElse(null);
+    }
+
     public void registerUser(User user) {
         CurrentUser.setCurrentUser(user);
     }
