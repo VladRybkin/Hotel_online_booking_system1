@@ -57,23 +57,7 @@ public class Controller {
         }
 
         List<Hotel> hotels = hotelDao.getAll();
-
-        // Group hotels by their city
-
-        Map<String, List<Hotel>> hotelsByCity = hotels.stream().collect(
-                Collectors.groupingBy(Hotel::getCity));
-
-        // Print out hotels that share one city
-
-        hotelsByCity
-                .values()
-                .stream()
-                .filter(hotelsWithSameCity -> hotelsWithSameCity.size() > 1)
-                .forEach(
-                        hotelsWithSameCity -> System.out
-                                .println("Hotels with same city: "
-                                        + hotelsWithSameCity));
-        return hotels;
+        return hotels.stream().filter(hotel -> hotel.getCity().equals(city)).collect(Collectors.toList());
     }
 
     public List<Hotel> findHotelByName(String name) {
@@ -82,23 +66,7 @@ public class Controller {
         }
 
         List<Hotel> hotels = hotelDao.getAll();
-
-        // Group hotels by their name
-
-        Map<String, List<Hotel>> hotelsByName = hotels.stream().collect(
-                Collectors.groupingBy(Hotel::getName));
-
-        // Print out hotels that share one name
-
-        hotelsByName
-                .values()
-                .stream()
-                .filter(hotelsWithSameName -> hotelsWithSameName.size() > 1)
-                .forEach(
-                        hotelsWithSameName -> System.out
-                                .println("Hotels with same name: "
-                                        + hotelsWithSameName));
-        return hotels;
+        return hotels.stream().filter(hotel -> hotel.getName().equals(name)).collect(Collectors.toList());
     }
 
     public void bookRoom(long roomId, long userId, long hotelId) {

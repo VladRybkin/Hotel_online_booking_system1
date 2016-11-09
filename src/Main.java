@@ -45,27 +45,34 @@ public class Main {
         }
         System.out.println("\n----------------------------------------------\n");
 
+//        ---------------------------------------------------------------------------------------------
+        Hotel hotel11;
+        User user11;
+        Room room11;
+
         System.out.println("Book room by id`s:");
-        Hotel hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
-        User user11 = CurrentUser.getCurrentUser();
+        hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
+        user11 = CurrentUser.getCurrentUser();
         if (hotel11 != null && user11 != null) {
-            Room room = hotel11.getRooms().stream().findFirst().orElse(null);
+            room11 = hotel11.getRooms().stream().findFirst().orElse(null);
             if (user11 != null) {
-                controller.bookRoom(room.getId(), user11.getId(), hotel11.getId());
+                controller.bookRoom(room11.getId(), user11.getId(), hotel11.getId());
             }
         }
         System.out.println("\n----------------------------------------------\n");
 
         System.out.println("Cancel reservation id`s:");
-        Hotel hotel12 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
-        User user22 = CurrentUser.getCurrentUser();
-        if (hotel12 != null && user22 != null) {
-            Room room = hotel12.getRooms().stream().findFirst().orElse(null);
-            if (user22 != null) {
-                controller.cancelReservation(room.getId(), user22.getId(), hotel12.getId());
+        hotel11 = controller.findHotelByName("ПРЕМЬЕР ПАЛАС").stream().findFirst().orElse(null);
+        user11 = CurrentUser.getCurrentUser();
+        if (hotel11 != null && user11 != null) {
+            room11 = hotel11.getRooms().stream().findFirst().orElse(null);
+            if (user11 != null) {
+                controller.cancelReservation(room11.getId(), user11.getId(), hotel11.getId());
             }
         }
         System.out.println("\n----------------------------------------------\n");
+
+//      ----------------------------------------------------------------------------------
 
         System.out.println("Find rooms by different parameters:");
         Map<String, String> param = new HashMap<>();
